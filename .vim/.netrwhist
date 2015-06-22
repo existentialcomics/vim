@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/var/www/sites/coreym/spiritandsong.com/htdocs/modules/ocp_izzy_lib'
+let g:netrw_dirhist_2='/var/www/sites/coreym/licensingonline.org/kohana'
+let g:netrw_dirhist_3='/var/www/sites/coreym/licensingonline.org/kohana/application'
+let g:netrw_dirhist_4='/var/www/sites/coreym/licensingonline.org/kohana/application/classes'
