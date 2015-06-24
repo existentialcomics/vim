@@ -205,6 +205,10 @@ let mapleader = ","
 " display the current function
 nnoremap <leader>f :echo cfi#format("%s", "")<CR>
 
+map <leader>c :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 "let &statusline='%<%f %(%h%m%r %)%=%{cfi#format("%s", "")}  %-15.15(%l,%c%V%)%P'
 
 "TODO: have it save filetype and load it, rather than detect every time, for effciency

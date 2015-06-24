@@ -44,15 +44,19 @@ hi FadeNumber  		 ctermfg=061
 hi Float  				 ctermfg=DarkRed
 hi FadeFloat  		 ctermfg=061	
 
+"RoyalBlue1
 hi Function				 ctermfg=063
 hi FadeFunction		 ctermfg=017	
 
+"hi x227_LightGoldenrod1 ctermfg=227 guifg=#ffff5f "rgb=255,255,95
 hi Repeat		  		 ctermfg=227	
 hi FadeRepeat	  	 ctermfg=095	
 
+"hi x227_LightGoldenrod1 ctermfg=227 guifg=#ffff5f "rgb=255,255,95
 hi Conditional				 ctermfg=227
 hi FadeConditional		 ctermfg=095	
 
+"hi x114_PaleGreen3 ctermfg=114 guifg=#87d787 "rgb=135,215,135
 hi Label		  		 ctermfg=114
 hi FadeLabel	  	 ctermfg=083	
 
@@ -70,6 +74,7 @@ hi FadeError  				 ctermfg=0 ctermbg=3
 hi Todo   				 ctermfg=234 ctermbg=3
 hi FadeTodo		 ctermfg=0 ctermbg=58
 
+"hi x105_LightSlateBlue ctermfg=105 guifg=#8787ff "rgb=135,135,255
 hi Boolean				 ctermfg=105	
 hi FadeBoolean		 ctermfg=059	
 
@@ -83,7 +88,8 @@ hi FadeIdentifier  ctermfg=060         guifg=#40D8D0
 hi Statement       ctermfg=DarkYellow  guifg=Yellow  gui=NONE
 hi FadeStatement   ctermfg=058         guifg=Yellow  gui=NONE
 
-hi PreProc         ctermfg=017      guifg=Green
+"hi x019_Blue3 ctermfg=19 guifg=#0000af "rgb=0,0,175
+hi PreProc         ctermfg=019      guifg=Green
 hi FadePreProc     ctermfg=023   guifg=DarkGreen
 
 hi Type            ctermfg=White   cterm=bold    guifg=White   gui=NONE
