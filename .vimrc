@@ -13,6 +13,12 @@ set viminfo='20,\"50    " read/write a .viminfo file, don't store more
 set history=50          " keep 50 lines of command line history
 set ruler               " show the cursor position all the time
 
+" speed up syntax highlighting
+"
+set nocursorcolumn
+set norelativenumber
+syntax sync minlines=256
+
 " show line numbers
 "autocmd FileType perl set number
 
@@ -186,7 +192,7 @@ set nocursorline
 
 augroup CursorLineOnlyInActiveWindow
 	autocmd!
-	autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+	autocmd VimEnter,WinEnter,BufWinEnter,BufEnter * setlocal cursorline
 	"autocmd WinEnter,BufWinEnter * setlocal cursorline
 	autocmd BufWinEnter,WinLeave * setlocal nocursorline
 augroup END

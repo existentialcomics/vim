@@ -14,9 +14,8 @@ endif
 let colors_name = "coreyColor"
 
 hi Cursor                              guifg=Black      guibg=#FFBF00
-hi Normal          ctermfg=Grey        guifg=#A4A090    guibg=Black
+hi Normal          ctermfg=Grey				 ctermbg=232			guifg=#A4A090    guibg=Black
 hi FadeNormal      ctermfg=DarkGrey        guifg=#A4A090    guibg=Black
-hi Visual          ctermbg=236                    guifg=Black      guibg=#C4C090  gui=NONE
 
 hi Comment         ctermfg=DarkGrey    guifg=DarkGrey
 									 " grey11
@@ -88,9 +87,9 @@ hi FadeIdentifier  ctermfg=060         guifg=#40D8D0
 hi Statement       ctermfg=DarkYellow  guifg=Yellow  gui=NONE
 hi FadeStatement   ctermfg=058         guifg=Yellow  gui=NONE
 
-"hi x019_Blue3 ctermfg=19 guifg=#0000af "rgb=0,0,175
-hi PreProc         ctermfg=019      guifg=Green
-hi FadePreProc     ctermfg=023   guifg=DarkGreen
+" purple
+hi PreProc         ctermfg=063     guifg=Green
+hi FadePreProc     ctermfg=060   guifg=DarkGreen
 
 hi Type            ctermfg=White   cterm=bold    guifg=White   gui=NONE
 hi FadeType        ctermfg=Grey        guifg=White   gui=NONE
@@ -101,20 +100,29 @@ hi FadeIgnore      ctermfg=233         guifg=#22201C
 hi FoldColumn                          guifg=#C4C0B0    guibg=#42403C
 hi Folded                              guifg=#C4C0B0    guibg=#22201C
 
-hi DiffAdd                             guifg=White      guibg=DarkBlue
-hi DiffDelete                          guifg=Black      guibg=LightCyan
-hi DiffText                            guifg=White      guibg=DarkRed    gui=NONE
-hi DiffChange                          guifg=Black      guibg=LightYellow
+
+hi DiffAdd         ctermbg=52                    guifg=White      guibg=DarkBlue
+hi DiffDelete      ctermbg=23                    guifg=Black      guibg=LightCyan
+					" dark red
+hi DiffText        ctermbg=18                    guifg=White      guibg=DarkRed    gui=NONE
+					" dark yellow
+hi DiffChange      ctermbg=94                    guifg=Black      guibg=LightYellow
+
+hi LineNr		   ctermfg=68	ctermbg=235	
+hi Visual          ctermbg=234  cterm=standout,bold                    guifg=Black      guibg=#C4C090  gui=NONE
 
 if v:version >= 700
 
-hi CursorLine     cterm=NONE      ctermbg=235                           guibg=#403820
+hi CursorLine     cterm=NONE      ctermbg=234                           guibg=#403820
 hi CursorColumn                                    guibg=#403820
 
 hi ColorColumn ctermbg=0 guibg=#eee8d5
-hi Search		cterm=bold ctermfg=092 ctermbg=185
+
+hi Search		cterm=bold,standout ctermfg=060 ctermbg=185
 
 hi MatchParen      ctermfg=White      guifg=White      guibg=DarkGreen    ctermbg=DarkGreen
+
+hi SpellBad cterm=standout
 
 hi Pmenu                          guifg=Black      guibg=#C4C090
 hi PmenuSel                       guifg=Black      guibg=#FFBF00
