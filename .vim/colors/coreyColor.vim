@@ -113,12 +113,12 @@ hi Visual          ctermbg=234  cterm=standout,bold                    guifg=Bla
 
 if v:version >= 700
 
-hi CursorLine     cterm=NONE      ctermbg=234                           guibg=#403820
+hi CursorLine     cterm=NONE      ctermbg=233                         guibg=#403820
 hi CursorColumn                                    guibg=#403820
 
 hi ColorColumn ctermbg=0 guibg=#eee8d5
 
-hi Search		cterm=bold,standout ctermfg=060 ctermbg=185
+hi Search		cterm=bold,standout ctermfg=100 ctermbg=052
 
 hi MatchParen      ctermfg=White      guifg=White      guibg=DarkGreen    ctermbg=DarkGreen
 

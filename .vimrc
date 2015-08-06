@@ -2,9 +2,6 @@ if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
    set fileencodings=utf-8,latin1
 endif
 
-" force it to 256 mode
-set t_Co=256
-
 set nocompatible        " Use Vim defaults (much better!)
 set bs=2                " allow backspacing over everything in insert mode
 ""set backup             " keep a backup file
@@ -43,7 +40,6 @@ endif
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-
 " open new windows towards the bottom and right
 set splitbelow
 set splitright
@@ -66,10 +62,13 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 if &term=="xterm"
-  set t_Co=8
+  "set t_Co=8
   set t_Sb=^[4%dm
   set t_Sf=^[3%dm
 endif
+
+" force it to 256 mode
+set t_Co=256
 
 " some extra commands for HTML editing
 nmap ,mh wbgueyei<<ESC>ea></<ESC>pa><ESC>bba
