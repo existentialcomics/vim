@@ -67,7 +67,7 @@ hi FadeSpecialChar		 ctermfg=089
 hi Delimiter				 ctermfg=Green	
 hi FadeDelimiter		 ctermfg=023
 
-hi Error  				 ctermfg=0 ctermbg=3
+hi Error  				 ctermfg=160 ctermbg=3
 hi FadeError  				 ctermfg=0 ctermbg=3
 
 hi Todo   				 ctermfg=234 ctermbg=3
@@ -120,7 +120,7 @@ hi ColorColumn ctermbg=0 guibg=#eee8d5
 
 hi Search		cterm=bold,standout ctermfg=100 ctermbg=052
 
-hi MatchParen      ctermfg=White      guifg=White      guibg=DarkGreen    ctermbg=DarkGreen
+hi MatchParen		cterm=bold      ctermfg=White      guifg=White      guibg=DarkGreen    ctermbg=none
 
 hi SpellBad cterm=standout
 
