@@ -13,6 +13,7 @@ set ruler               " show the cursor position all the time
 " speed up syntax highlighting
 "
 set nocursorcolumn
+set colorcolumn=
 set norelativenumber
 syntax sync minlines=256
 
