@@ -2,6 +2,8 @@ if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
    set fileencodings=utf-8,latin1
 endif
 
+let mapleader = ","
+
 set nocompatible        " Use Vim defaults (much better!)
 set bs=2                " allow backspacing over everything in insert mode
 ""set backup             " keep a backup file
@@ -10,18 +12,20 @@ set viminfo='20,\"50    " read/write a .viminfo file, don't store more
 set history=50          " keep 50 lines of command line history
 set ruler               " show the cursor position all the time
 
+" show line numbers
+"set number              " turn on line numbers
+"set relativenumber
+"set nonumber             " turn off line numbers
+"set numberwidth=5       " We are good up to 99999 lines
+
+nnoremap <leader>n :set relativenumber!<CR>
+
 " speed up syntax highlighting
 "
 set nocursorcolumn
 set colorcolumn=
-set norelativenumber
 syntax sync minlines=256
 
-" show line numbers
-"autocmd FileType perl set number
-
-"set number              " turn on line numbers
-"set numberwidth=5       " We are good up to 99999 lines
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
@@ -31,10 +35,6 @@ if has("autocmd")
   \   exe "normal g'\"" |
   \ endif
 endif
-
-" comment/uncomment blocks of code (in vmode)
-"vmap _c :s/^/#/gi<Enter>
-"vmap _C :s/^#//gi<Enter>
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -48,21 +48,6 @@ if bufwinnr(1)
   map + 3<C-W>>
   map - 3<C-W><
 endif
-
-" switch buffers
-nmap <leader>p :bp<CR>
-nmap <leader>n :bn<CR>
-
-nmap <leader>1 :b1<CR>
-nmap <leader>2 :b2<CR>
-nmap <leader>3 :b3<CR>
-nmap <leader>4 :b4<CR>
-nmap <leader>5 :b5<CR>
-nmap <leader>6 :b6<CR>
-nmap <leader>7 :b7<CR>
-nmap <leader>8 :b8<CR>
-nmap <leader>9 :b9<CR>
-nmap <leader>0 :b0<CR>
 
 " better tab completion
 set wildmode=longest,list,full
@@ -109,8 +94,6 @@ vmap <C-j> <C-D>zz
 vmap <C-h> ^
 vmap <C-l> $
 " ctrl+movement key = change windows
-"nnoremap j jzz
-"nnoremap k kzz
 
 nmap <Up> kkkzz
 nmap <Down> jjjzz
@@ -131,11 +114,15 @@ vmap <tab> >gv
 vmap <s-tab> <gv
 
 set lbr
-set tw=400
+set textwidth=400
 
-set ai "Auto indent
-set si "Smart indent
+set autoindent "Auto indent
+" set smartindent "Smart indent <- removed because it would jump comments to line start
+" set cindent  " didn't work though -^
+set nosmartindent 
 set wrap "Wrap lines
+
+"set formatoptions-=cro
 
 " show the name of file in the status bar
 "set laststatus=2
@@ -143,17 +130,46 @@ set wrap "Wrap lines
 
 "******* PERL specific settings
 
-"let perl_extended_vars=1 " highlight advanced perl vars inside strings
+let perl_extended_vars=1 " highlight advanced perl vars inside strings
 "let perl_fold=1
-"set foldlevelstart=99
+set foldlevelstart=99
 ""let perl_fold_blocks=1
 "set foldmethod=syntax
 "set foldnestmax=10
 "
 "let g:php_folding=2
 "
-"let perl_include_pod   = 1    "include pod.vim syntax file with perl.vim
-"let perl_sync_dist     = 250  "use more context for highlighting
+let perl_include_pod   = 1    "include pod.vim syntax file with perl.vim
+let perl_sync_dist     = 250  "use more context for highlighting
+
+function GetPerlFold()
+  if getline(v:lnum) =~ '^\s*sub\s'
+    return ">1"
+  elseif getline(v:lnum) =~ '\}\s*$'
+    let my_perlnum = v:lnum
+    let my_perlmax = line("$")
+    while (1)
+      let my_perlnum = my_perlnum + 1
+      if my_perlnum > my_perlmax
+        return "<1"
+      endif
+      let my_perldata = getline(my_perlnum)
+      if my_perldata =~ '^\s*\(\#.*\)\?$'
+        " do nothing
+      elseif my_perldata =~ '^\s*sub\s'
+        return "<1"
+      else
+        return "="
+      endif
+    endwhile
+  else
+    return "="
+  endif
+endfunction
+setlocal foldexpr=GetPerlFold()
+setlocal foldmethod=expr
+
+"********* END PERL
 
 
 " check perl code with :make
@@ -188,7 +204,6 @@ let g:diminactive_use_syntax = 0
 set laststatus=2
 
 "nnoremap <C-g>f :echo cfi#format("%s", "")<CR>
-let mapleader = ","
 " display the current function
 nnoremap <leader>f :echo cfi#format("%s", "")<CR>
 
