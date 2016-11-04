@@ -18,13 +18,33 @@ set ruler               " show the cursor position all the time
 "set nonumber             " turn off line numbers
 "set numberwidth=5       " We are good up to 99999 lines
 
+set mouse=""
+
+"let g:channel = ch_open('localhost:12345')
+
+"command! -nargs=1 Msg call SendChat(<args>)
+"function! SendChat(message)
+	"echo ch_evalexpr(g:channel, $USER . ': ' . a:message)
+"endfunc
+
+function! ToggleMouse()
+    " check if mouse is enabled
+    if &mouse == 'a'
+        " disable mouse
+        set mouse=
+    else
+        " enable mouse everywhere
+        set mouse=a
+    endif
+endfunc
+
 nnoremap <leader>n :set relativenumber!<CR>
 
 " speed up syntax highlighting
 "
 set nocursorcolumn
 set colorcolumn=
-syntax sync minlines=256
+syntax sync minlines=64
 
 
 " Only do this part when compiled with support for autocommands
@@ -117,7 +137,7 @@ set lbr
 set textwidth=400
 
 set autoindent "Auto indent
-" set smartindent "Smart indent <- removed because it would jump comments to line start
+"set smartindent "Smart indent <- removed because it would jump comments to line start
 " set cindent  " didn't work though -^
 set nosmartindent 
 set wrap "Wrap lines
@@ -129,45 +149,45 @@ set wrap "Wrap lines
 "set statusline=%f "tail of the filename
 
 "******* PERL specific settings
-
-let perl_extended_vars=1 " highlight advanced perl vars inside strings
-"let perl_fold=1
-set foldlevelstart=99
-""let perl_fold_blocks=1
-"set foldmethod=syntax
-"set foldnestmax=10
 "
-"let g:php_folding=2
+"let perl_extended_vars=1 " highlight advanced perl vars inside strings
+""let perl_fold=1
+"set foldlevelstart=99
+"""let perl_fold_blocks=1
+""set foldmethod=syntax
+""set foldnestmax=10
+""
+""let g:php_folding=2
+""
+"let perl_include_pod   = 1    "include pod.vim syntax file with perl.vim
+"let perl_sync_dist     = 250  "use more context for highlighting
 "
-let perl_include_pod   = 1    "include pod.vim syntax file with perl.vim
-let perl_sync_dist     = 250  "use more context for highlighting
-
-function GetPerlFold()
-  if getline(v:lnum) =~ '^\s*sub\s'
-    return ">1"
-  elseif getline(v:lnum) =~ '\}\s*$'
-    let my_perlnum = v:lnum
-    let my_perlmax = line("$")
-    while (1)
-      let my_perlnum = my_perlnum + 1
-      if my_perlnum > my_perlmax
-        return "<1"
-      endif
-      let my_perldata = getline(my_perlnum)
-      if my_perldata =~ '^\s*\(\#.*\)\?$'
-        " do nothing
-      elseif my_perldata =~ '^\s*sub\s'
-        return "<1"
-      else
-        return "="
-      endif
-    endwhile
-  else
-    return "="
-  endif
-endfunction
-setlocal foldexpr=GetPerlFold()
-setlocal foldmethod=expr
+"function GetPerlFold()
+"  if getline(v:lnum) =~ '^\s*sub\s'
+"    return ">1"
+"  elseif getline(v:lnum) =~ '\}\s*$'
+"    let my_perlnum = v:lnum
+"    let my_perlmax = line("$")
+"    while (1)
+"      let my_perlnum = my_perlnum + 1
+"      if my_perlnum > my_perlmax
+"        return "<1"
+"      endif
+"      let my_perldata = getline(my_perlnum)
+"      if my_perldata =~ '^\s*\(\#.*\)\?$'
+"        " do nothing
+"      elseif my_perldata =~ '^\s*sub\s'
+"        return "<1"
+"      else
+"        return "="
+"      endif
+"    endwhile
+"  else
+"    return "="
+"  endif
+"endfunction
+"setlocal foldexpr=GetPerlFold()
+"setlocal foldmethod=expr
 
 "********* END PERL
 
@@ -211,6 +231,26 @@ map <leader>c :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+"**********************************************
+" file is large from 10mb
+let g:LargeFile = 1024 * 1024 * 10
+augroup LargeFile 
+ autocmd BufReadPre * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
+augroup END
+
+function! LargeFile()
+ " no syntax highlighting etc
+ set eventignore+=FileType
+ " save memory when other file is viewed
+ setlocal bufhidden=unload
+ " is read-only (write with :w new_filename)
+ setlocal buftype=nowrite
+ " no undo possible
+ setlocal undolevels=-1
+ " display message
+ autocmd VimEnter *  echo "The file is larger than " . (g:LargeFile / 1024 / 1024) . " MB, so some options are changed (see .vimrc for details)."
+endfunction
+"**********************************************
 
 filetype plugin on
 
