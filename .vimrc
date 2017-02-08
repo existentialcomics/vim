@@ -3,6 +3,7 @@ if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
 endif
 
 let mapleader = ","
+filetype plugin indent on    " required
 
 set nocompatible        " Use Vim defaults (much better!)
 set bs=2                " allow backspacing over everything in insert mode
@@ -92,14 +93,20 @@ set t_Co=256
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set expandtab      " no real tabs please!
-set noexpandtab    " real tabs
+set expandtab      " no real tabs please!
+"set noexpandtab    " real tabs
 set shiftwidth=4   " auto-indent amount when using cindent,
                    " >>, << and stuff like that
 set softtabstop=4  " auto-indent amount when using cindent,
 set tabstop=4      " real tabs should be 6, and they will show with
                    " set list on
-set smarttab
+"set smarttab
+
+"set autoindent "Auto indent
+"set smartindent "Smart indent <- removed because it would jump comments to line start
+" set cindent  " didn't work though -^
+"set nosmartindent 
+set wrap "Wrap lines
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -133,14 +140,8 @@ set pastetoggle=<F11>
 vmap <tab> >gv
 vmap <s-tab> <gv
 
-set lbr
+"set lbr
 set textwidth=400
-
-set autoindent "Auto indent
-"set smartindent "Smart indent <- removed because it would jump comments to line start
-" set cindent  " didn't work though -^
-set nosmartindent 
-set wrap "Wrap lines
 
 "set formatoptions-=cro
 
