@@ -4,6 +4,7 @@ endif
 
 let mapleader = ","
 filetype plugin indent on    " required
+filetype plugin on
 
 set nocompatible        " Use Vim defaults (much better!)
 set bs=2                " allow backspacing over everything in insert mode
@@ -46,7 +47,6 @@ nnoremap <leader>n :set relativenumber!<CR>
 set nocursorcolumn
 set colorcolumn=
 syntax sync minlines=64
-
 
 " Only do this part when compiled with support for autocommands
 if has("autocmd")
@@ -140,14 +140,7 @@ set pastetoggle=<F11>
 vmap <tab> >gv
 vmap <s-tab> <gv
 
-"set lbr
 set textwidth=400
-
-"set formatoptions-=cro
-
-" show the name of file in the status bar
-"set laststatus=2
-"set statusline=%f "tail of the filename
 
 "******* PERL specific settings
 "
@@ -191,7 +184,6 @@ set textwidth=400
 "setlocal foldmethod=expr
 
 "********* END PERL
-
 
 " check perl code with :make
 autocmd FileType perl set makeprg=perl\ -c\ %\ $*
@@ -253,7 +245,4 @@ function! LargeFile()
 endfunction
 "**********************************************
 
-filetype plugin on
-
-"colorscheme default
 colorscheme coreyColor
